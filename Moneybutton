@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Hustle Drop</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.15rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    button {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: #fff;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(to right, #00e0ff, #0080ff);
+    }
+    .idea-box {
+      margin-top: 2rem;
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 1.5rem;
+      border-radius: 10px;
+      display: none;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+    .signup-box {
+      margin-top: 2rem;
+      display: none;
+    }
+    input[type="email"] {
+      padding: 0.75rem;
+      width: 70%;
+      border-radius: 5px;
+      border: none;
+      margin-right: 0.5rem;
+    }
+    .email-btn {
+      padding: 0.75rem 1.25rem;
+      background-color: #00ffae;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Discover a Hustle That Pays</h1>
+    <p>One powerful side hustle idea a day. Just one click could unlock the idea that changes your life. No gimmicks—just real, working income strategies.</p>
+    <button onclick="generateIdea()">💸 Show Me Today’s Hustle</button>
+    <div class="idea-box" id="ideaBox"></div>
+
+    <div class="signup-box" id="signupBox">
+      <p>🔥 Want 3 more proven side hustle ideas? Sign up below and we'll unlock them instantly.</p>
+      <input type="email" id="emailInput" placeholder="Enter your email" />
+      <button class="email-btn" onclick="signupUser()">Unlock More</button>
+    </div>
+  </div>
+
+  <script>
+    const ideas = [
+      "Get paid to wait in line for luxury drops, tech releases, or events.",
+      "Offer AI prompt engineering gigs on Fiverr for small businesses.",
+      "Resell trending local items on Facebook Marketplace or OfferUp.",
+      "Become a digital landlord: rent out Notion templates or Airtable systems.",
+      "Flip liquidation pallets from Amazon or Walmart.",
+      "Run errands for seniors or new parents via TaskRabbit.",
+      "License short-form content to brands via platforms like Jellysmack or Spotter.",
+      "Host 'learn to make money' workshops in your community or online.",
+      "Set up a vending machine in an unusual but high-traffic location.",
+      "Monetize a niche TikTok page with affiliate links to digital products."
+    ];
+
+    let ideaShown = false;
+
+    function generateIdea() {
+      if (ideaShown) return;
+      const randomIdea = ideas[Math.floor(Math.random() * ideas.length)];
+      document.getElementById('ideaBox').innerText = randomIdea;
+      document.getElementById('ideaBox').style.display = 'block';
+      document.getElementById('signupBox').style.display = 'block';
+      ideaShown = true;
+    }
+
+    function signupUser() {
+      const email = document.getElementById('emailInput').value;
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      alert("Thanks for signing up! Your 3 bonus hustle ideas will be emailed to you soon.");
+      document.getElementById('signupBox').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
