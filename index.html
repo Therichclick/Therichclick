@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Rich Click - Daily Hustle Drop</title>
   <meta name="description" content="Discover daily side hustle ideas that could change your financial future. Join The Rich Click community for unconventional ways to make money online and offline." />
   <meta name="keywords" content="side hustles, make money, work from home, financial freedom, passive income, daily hustle ideas" />
   <meta name="author" content="The Rich Click" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <style>
     body {
       margin: 0;
@@ -16,13 +23,30 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: start;
       min-height: 100vh;
       text-align: center;
+    }
+    nav {
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    nav a {
+      color: #00ffae;
+      font-weight: bold;
+      text-decoration: none;
     }
     .container {
       max-width: 700px;
       padding: 2rem;
+    }
+    img.logo {
+      width: 150px;
+      margin-bottom: 1rem;
     }
     h1 {
       font-size: 2.5rem;
@@ -49,14 +73,19 @@
       transform: scale(1.05);
       background: linear-gradient(to right, #00e0ff, #0080ff);
     }
-    .idea-box {
+    .idea-box, .limit-box {
       margin-top: 2rem;
       background-color: rgba(255, 255, 255, 0.15);
       padding: 1.5rem;
       border-radius: 10px;
-      display: none;
       font-size: 1.1rem;
       line-height: 1.5;
+    }
+    .limit-box {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #ffcc00;
+      display: none;
     }
     .signup-box {
       margin-top: 2rem;
@@ -78,23 +107,32 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    #limitMessage {
-      margin-top: 1.5rem;
+    .countdown {
+      margin-top: 1rem;
       font-size: 1rem;
-      color: #ffdd57;
+      color: #00ffae;
     }
   </style>
 </head>
 <body>
+  <nav>
+    <a href="/blog/blog.html">Blog</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms of Service</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+
   <div class="container">
-    <nav style="margin-bottom: 20px;">
-      <a href="/blog/blog.html" style="color: #00ffae; font-weight: bold; text-decoration: none;">📚 Read Our Blog</a>
-    </nav>
+    <img src="/asset/logo.png" alt="The Rich Click Logo" class="logo"/>
     <h1>Unlock Your Financial Freedom: One Click at a Time!</h1>
     <p>Discover a side hustle so powerful, it could replace your full-time income. Tap below to reveal today’s opportunity—and get 3 more just by signing up.</p>
     <button onclick="generateIdea()">💸 Show Me Today’s Hustle</button>
 
     <div class="idea-box" id="ideaBox"></div>
+    <div class="limit-box" id="limitBox">
+      You've hit your 3 hustle ideas for today. Come back tomorrow or <a href="/blog/blog.html" style="color: #00ffae; text-decoration: underline;">read our blog</a> for more. Want even more now? Drop your email below.
+      <div class="countdown" id="countdown"></div>
+    </div>
 
     <div class="signup-box" id="signupBox">
       <p>🔥 Want 3 more proven side hustle ideas now? Sign up and we’ll send them to your inbox.</p>
@@ -103,8 +141,6 @@
         <button class="email-btn" type="submit">Subscribe</button>
       </form>
     </div>
-
-    <div id="limitMessage"></div>
   </div>
 
   <script>
@@ -112,186 +148,138 @@
       "Couch flipping for profit.",
       "Airbnb arbitrage without owning property.",
       "Wholesaling real estate contracts.",
-      "Create AI-generated art and sell as posters.",
+      "Sell AI-generated art prints or posters.",
       "Rent baby gear to tourists via BabyQuip.",
       "Start a pressure washing business.",
       "Design and sell digital planners on Etsy.",
-      "Become a virtual assistant on Upwork.",
-      "Rent out your car on Turo.",
-      "Start a vending machine route.",
-      "Charge electric scooters for Bird or Lime.",
+      "Become a virtual assistant for entrepreneurs on Upwork.",
+      "Rent out your car via Turo.",
+      "Start a vending machine side hustle.",
+      "Charge scooters for Bird or Lime.",
       "Sell themed journals via Amazon KDP.",
+      "Create bumper sticker designs and sell them.",
       "Offer mobile phone repair from home.",
       "Sell backyard chicken eggs locally.",
-      "Build Shopify stores for small businesses.",
+      "Build Shopify stores for local businesses.",
       "Do freelance bookkeeping.",
       "Proofread student essays.",
       "Sell baked goods at weekend farmers' markets.",
-      "Rent your garage as storage space.",
+      "Host a ‘rent my garage’ business.",
       "Start a mobile car detailing service.",
-      "Host a podcast interviewing side hustlers.",
+      "Start a podcast that interviews local hustlers.",
       "Run a YouTube channel with AI narration.",
-      "Become a phone mystery shopper.",
+      "Do phone mystery shopping.",
       "Create a meditation or sound healing app.",
       "Sell your handwriting as a digital font.",
       "Write grants for nonprofits.",
-      "Flip rare collectibles on eBay.",
-      "Record audiobooks for indie authors.",
-      "Help fill out basic legal forms (non-advice).",
+      "Flip rare collector's items on eBay.",
+      "Record audio books for indie authors.",
+      "Offer basic legal form help (non-legal advice).",
       "Offer digital decluttering services.",
       "Start a paid newsletter on Substack.",
-      "License your own Notion dashboard.",
+      "Create and license a Notion productivity dashboard.",
       "Design merch for YouTubers.",
-      "Build affiliate product comparison blogs.",
-      "Sell AI prompt templates.",
-      "Be a brand ambassador on campuses.",
-      "Start a pay-what-you-can coffee cart.",
+      "Create affiliate product comparison blogs.",
+      "Write AI prompts and sell them as templates.",
+      "Be a brand ambassador on college campuses.",
+      "Start a Pay What You Can coffee cart.",
       "Teach English online with Cambly.",
-      "Sell guides and templates on Gumroad.",
-      "Rent your backyard for events.",
-      "Make candles inspired by your city.",
-      "Create a faceless TikTok with affiliate links.",
-      "Host virtual coworking sessions.",
-      "Do SEO for local businesses.",
-      "Buy unclaimed mail pallets to resell.",
-      "Flip thrift finds on Marketplace.",
-      "Resell public domain digital products.",
+      "Create niche how-to guides on Gumroad.",
+      "Rent your backyard as an event space.",
+      "Make and sell candles with local scents.",
+      "Create a faceless TikTok account with affiliate links.",
+      "Host paid virtual coworking sessions.",
+      "Do SEO for local small business sites.",
+      "Buy pallets of lost mail to resell.",
+      "Flip thrift store finds on Facebook Marketplace.",
+      "Resell free-to-license digital courses.",
       "Create and sell Canva templates.",
       "Be a freelance Pinterest manager.",
-      "Write niche ebooks and self-publish.",
-      "Make audiobook summaries.",
-      "Edit TikToks for older entrepreneurs.",
-      "License music loops.",
-      "Build budget calculators as downloads.",
-      "Sell vintage fashion on Depop.",
-      "Write resumes professionally.",
-      "Do local flyer distribution.",
-      "Offer caption and ad copy services.",
-      "Flip digital game skins.",
-      "Create how-to Reels for niche hobbies.",
-      "Host Airbnb Experiences (tours, walks).",
-      "Make resource PDFs and sell for $5.",
-      "Do odd jobs from Nextdoor.",
-      "Tutor kids online in coding or chess.",
-      "Design logos for Etsy shops.",
-      "Help organize garages or sheds.",
-      "Transcribe podcasts for content creators.",
-      "Write compelling Amazon listings.",
-      "Blog about successful hustlers.",
+      "Write ebooks about niche hobbies and self-publish.",
+      "Create audiobook summaries.",
+      "Make TikToks for boomers who don’t know how.",
+      "Offer pet waste removal in your neighborhood.",
+      "License music loops or beats.",
+      "Create and sell tiny digital tools like budget calculators.",
+      "Sell vintage clothes on Depop.",
+      "Offer resume writing services.",
+      "Do local flyer or yard sign marketing.",
+      "Offer caption writing services.",
+      "Flip digital collectibles like NFTs or skins.",
+      "Get paid to stand in line for product launches.",
+      "Create niche “how-to” Instagram Reels.",
+      "Host Airbnb Experiences—like city tours or photo walks.",
+      "Create a resource list PDF and charge $5.",
+      "Perform odd jobs from Nextdoor posts.",
+      "Teach kids coding or chess online.",
+      "Make logos for small Etsy stores.",
+      "Offer to clean out garages or sheds.",
+      "Manage Amazon FBA for others.",
+      "Transcribe audio for podcasts on Rev.",
+      "Write Amazon product descriptions.",
+      "Create a blog interviewing successful side hustlers.",
       "Sell pre-built dropshipping stores.",
-      "Join UserTesting.com for app reviews.",
-      "Offer local moving or hauling help.",
-      "Do LinkedIn resume feedback gigs.",
-      "Pet sit using Rover.",
-      "Flip Craigslist curb alerts.",
-      "Become a local Google Maps guide.",
-      "Rent out party gear on weekends.",
+      "Do user testing at UserTesting.com.",
+      "Offer 'man with a van' hauling on Craigslist.",
+      "Review resumes on LinkedIn for tips.",
+      "Pet sit on Rover or TrustedHousesitters.",
+      "Flip free Craigslist curb alerts.",
+      "Be a local guide on Google Maps for rewards.",
+      "Rent out party equipment on weekends.",
       "Be a virtual accountability coach.",
-      "Create tattoo stencil downloads.",
-      "Make and rent lawn games.",
-      "Sell digital sticker packs.",
-      "Run errands for local seniors.",
-      "Digitize photos/slides for neighbors.",
-      "Write product descriptions for Etsy.",
-      "Voice-over small business ads.",
-      "Create influencer media kits.",
-      "Sell custom printable wall art.",
-      "Build local guide PDFs for tourists.",
-      "Offer transcription services.",
-      "Build basic mobile apps for events.",
-      "Help local businesses list on Google.",
-      "Create intro animations for YouTubers.",
-      "Offer Fiverr gigs for niche writing."
+      "Create tattoo stencils and sell them.",
+      "Offer personalized video shoutouts.",
+      "Make and rent out giant yard games.",
+      "Sell sticker packs online.",
+      "Offer local errand services for busy parents.",
+      "Digitize old family photos/slides for neighbors."
     ];
 
-    const maxClicksPerDay = 3;
-    const todayKey = new Date().toISOString().slice(0, 10);
-    const storageKey = 'dailyClicks';
-
-    function getClickData() {
-      const saved = JSON.parse(localStorage.getItem(storageKey)) || {};
-      if (saved.date !== todayKey) {
-        return { count: 0, date: todayKey };
-      }
-      return saved;
-    }
-
-    function saveClickData(data) {
-      localStorage.setItem(storageKey, JSON.stringify(data));
-    }
+    const MAX_CLICKS = 3;
+    const STORAGE_KEY = 'dailyClickCount';
+    const RESET_KEY = 'lastReset';
+    const ideaBox = document.getElementById('ideaBox');
+    const signupBox = document.getElementById('signupBox');
+    const limitBox = document.getElementById('limitBox');
+    const countdown = document.getElementById('countdown');
 
     function generateIdea() {
-      const data = getClickData();
+      let count = parseInt(localStorage.getItem(STORAGE_KEY)) || 0;
+      const lastReset = parseInt(localStorage.getItem(RESET_KEY)) || 0;
+      const now = Date.now();
 
-      if (data.count >= maxClicksPerDay) {
-        document.getElementById('ideaBox').style.display = 'none';
-        document.getElementById('signupBox').style.display = 'block';
-        showLimitMessage();
+      if (now - lastReset > 86400000) {
+        count = 0;
+        localStorage.setItem(STORAGE_KEY, '0');
+        localStorage.setItem(RESET_KEY, now.toString());
+      }
+
+      if (count >= MAX_CLICKS) {
+        limitBox.style.display = 'block';
+        ideaBox.style.display = 'none';
+        signupBox.style.display = 'block';
+        showCountdown();
         return;
       }
 
       const randomIdea = ideas[Math.floor(Math.random() * ideas.length)];
-      document.getElementById('ideaBox').innerText = randomIdea;
-      document.getElementById('ideaBox').style.display = 'block';
-      document.getElementById('signupBox').style.display = 'block';
-      document.getElementById('limitMessage').innerText = '';
-
-      data.count += 1;
-      data.date = todayKey;
-      saveClickData(data);
-
-      if (data.count >= maxClicksPerDay) {
-        showLimitMessage();
-      }
+      ideaBox.innerText = randomIdea;
+      ideaBox.style.display = 'block';
+      signupBox.style.display = 'block';
+      limitBox.style.display = 'none';
+      localStorage.setItem(STORAGE_KEY, (count + 1).toString());
     }
 
-    function showLimitMessage() {
-      const msg = document.getElementById('limitMessage');
-      const resetTime = getMidnightTime();
-      const timerSpan = document.createElement('span');
-      timerSpan.id = 'countdownTimer';
-
-      msg.innerHTML = `🚫 You’ve hit your 3 hustle ideas for today!<br>Sign up or check out our blog for more.<br>`;
-      msg.appendChild(timerSpan);
-      updateCountdown(resetTime);
+    function showCountdown() {
+      const now = Date.now();
+      const lastReset = parseInt(localStorage.getItem(RESET_KEY)) || now;
+      const millisLeft = 86400000 - (now - lastReset);
+      const hours = Math.floor(millisLeft / 3600000);
+      const minutes = Math.floor((millisLeft % 3600000) / 60000);
+      const seconds = Math.floor((millisLeft % 60000) / 1000);
+      countdown.innerText = `⏳ New ideas in: ${hours}h ${minutes}m ${seconds}s`;
+      setTimeout(showCountdown, 1000);
     }
-
-    function getMidnightTime() {
-      const now = new Date();
-      const midnight = new Date();
-      midnight.setHours(24, 0, 0, 0);
-      return midnight;
-    }
-
-    function updateCountdown(targetTime) {
-      const timerEl = document.getElementById('countdownTimer');
-      function tick() {
-        const now = new Date();
-        const diff = targetTime - now;
-
-        if (diff <= 0) {
-          timerEl.innerHTML = "⏰ New ideas available!";
-          return;
-        }
-
-        const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
-        const minutes = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
-        const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-
-        timerEl.innerHTML = `⏳ New ideas drop in: <strong>${hours}:${minutes}:${seconds}</strong>`;
-        setTimeout(tick, 1000);
-      }
-      tick();
-    }
-
-    window.onload = () => {
-      const data = getClickData();
-      if (data.count >= maxClicksPerDay) {
-        document.getElementById('ideaBox').style.display = 'none';
-        document.getElementById('signupBox').style.display = 'block';
-        showLimitMessage();
-      }
-    };
   </script>
 </body>
 </html>
