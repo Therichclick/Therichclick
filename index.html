@@ -155,19 +155,36 @@
 
     <div class="idea-box" id="ideaBox"></div>
     <div class="limit-box" id="limitBox">
-      You've hit your 3 hustle ideas for today. Come back tomorrow or <a href="/blog/blog.html" style="color: #00ffae; text-decoration: underline;">read our blog</a> for more. Want even more now? Drop your email below.
+      🚫 You've hit your 3 hustle ideas for today. Come back tomorrow or <a href="/blog/blog.html" style="color: #00ffae; text-decoration: underline;">read our blog</a> for more. Want even more now? Drop your email below.
       <div class="countdown" id="countdown"></div>
     </div>
 
     <div class="signup-box" id="signupBox">
   <p>🔥 Want 3 more proven side hustle ideas now? Sign up and we’ll send them to your inbox.</p>
-  <form action="https://assets.mailerlite.com/jsonp/1530353/forms/154795251155862876/subscribe" method="post" target="_blank">
+  <form 
+    action="https://assets.mailerlite.com/jsonp/1530353/forms/154795251155862876/subscribe" 
+    method="post" 
+    target="ml-submission-frame"
+    onsubmit="handleSuccess()"
+  >
     <input type="email" name="fields[email]" placeholder="Enter your email" required />
     <input type="hidden" name="ml-submit" value="1" />
     <input type="hidden" name="anticsrf" value="true" />
     <button class="email-btn" type="submit">Subscribe</button>
   </form>
+  <iframe name="ml-submission-frame" style="display:none;"></iframe>
+  <p id="success-msg" style="display:none; color:#00ffae; font-weight:bold; margin-top:1rem;">
+    You're in! Welcome to The Rich Click 💸 Check your inbox for Exclusive Side hustles.
+  </p>
 </div>
+
+<script>
+  function handleSuccess() {
+    setTimeout(() => {
+      document.getElementById('success-msg').style.display = 'block';
+    }, 1000); // slight delay to simulate form processing
+  }
+</script>
 
     <div class="blog-promo">
       <h2>🚀 See Real Hustlers Making Real Money</h2>
