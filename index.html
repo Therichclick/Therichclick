@@ -1,215 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Rich Click - Daily Hustle Drop</title>
-  <meta name="description" content="Discover daily side hustle ideas that could change your financial future. Join The Rich Click community for unconventional ways to make money online and offline." />
-  <meta name="keywords" content="side hustles, make money, work from home, financial freedom, passive income, daily hustle ideas" />
-  <meta name="author" content="The Rich Click" />
-  <style>
-    /* Styles omitted here to save space, assume your existing styles are unchanged */
-  </style>
-</head>
-<body>
-  <nav>
-    <a href="/blog/blog.html">Blog</a>
-    <a href="/privacy.html">Privacy Policy</a>
-    <a href="/terms.html">Terms of Service</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
+<script>
+  const ideas = [
+    "Couch flipping", "Airbnb arbitrage", "Wholesale real estate",
+    "Print on demand T-shirts", "Sell digital planners on Etsy", "Create faceless YouTube videos",
+    "Self-publish low-content books", "Online tutoring", "Amazon FBA",
+    "Flipping domain names", "Drop servicing", "Offer Notion templates",
+    "Sell Canva templates", "Rent your car on Turo", "Voiceover acting",
+    "Freelance video editing", "Write newsletters with Beehiiv", "Manage social media for businesses",
+    "Remote customer service gigs", "Sell prompts for AI tools", "Run TikTok ads for local businesses",
+    "Instagram growth consulting", "Freelance UGC content creation", "Virtual assistant services",
+    "Create and sell online courses", "Tech support freelancing", "Flipping yard sale items",
+    "License your photography", "Create stock music", "Print on demand journals",
+    "Etsy mystery boxes", "Digital coloring books", "Freelance copywriting",
+    "Subscription box reselling", "Crypto affiliate programs", "Build and flip Shopify stores",
+    "Design logos on Fiverr", "Run a podcast network", "Build SaaS tools with no-code",
+    "Print merch for influencers", "Offer AI automation services", "Website flipping",
+    "Sell PowerPoint templates", "Dropship from local suppliers", "Mobile detailing business",
+    "Offer resume writing", "Event videography", "Offer drone photography",
+    "Design tattoo ideas", "Ghostwrite eBooks", "Curate Amazon storefronts",
+    "Freelance email marketing", "Etsy wall art printables", "Flipping vintage clothes",
+    "Sell MRR products", "Pet sitting services", "Sell car decals",
+    "Create a local newsletter", "Write business plans", "Flip vending machines",
+    "Buy and sell concert tickets", "Niche meme pages", "Offer bookkeeping services",
+    "Teach music lessons online", "Host virtual workshops", "Real estate bird dogging",
+    "LinkedIn profile optimization", "Offer proofreading services", "Build niche websites",
+    "Monetize your email list", "Buy and flip electronics", "Flipping Pokemon cards",
+    "Sell phone wallpapers", "Write scripts for YouTubers", "Niche coaching/consulting",
+    "Sell fonts or typefaces", "Dropshipping with personalization", "Etsy SVG bundles",
+    "Offer online fitness coaching", "Buy liquidation pallets", "Create viral Twitter threads",
+    "Offer Fiverr gigs as bundles", "Run IG pages then sell shoutouts", "Review tech products on YouTube",
+    "Use GPT to write niche guides", "Host Airbnb experiences", "Offer Canva coaching",
+    "Review products on TikTok", "Create AI coloring books", "Become an affiliate for SaaS tools",
+    "Resell online subscriptions", "Run a fantasy sports newsletter", "Sell editable wedding invites",
+    "Create a job board site", "Build PLR product bundles", "Rent out photography gear",
+    "Sell niche eBook guides", "Flip clearance items on eBay", "Write blog posts for others",
+    "License your art to POD platforms"
+  ];
 
-  <div class="container">
-    <img src="assets/logo.png" alt="The Rich Click Logo" class="logo"/>
-    <h1>Unlock Your Financial Freedom: One Click at a Time!</h1>
-    <p>Discover a side hustle so powerful, it could replace your full-time income. Tap below to reveal today’s opportunity—and get 3 more just by signing up.</p>
-    <button id="hustleBtn">💸 Show Me Today’s Hustle</button>
+  let count = parseInt(localStorage.getItem("clickCount")) || 0;
+  const maxClicks = 3;
+  const ideaBox = document.getElementById("ideaBox");
+  const limitBox = document.getElementById("limitBox");
+  const signupBox = document.getElementById("signupBox");
+  const countdown = document.getElementById("countdown");
 
-    <div class="idea-box" id="ideaBox"></div>
-    <div class="limit-box" id="limitBox">
-      🚫 You've hit your 3 hustle ideas for today. Come back tomorrow or <a href="/blog/blog.html" style="color: #00ffae; text-decoration: underline;">read our blog</a> for more.
-      <div class="countdown" id="countdown"></div>
-    </div>
-
-    <div class="signup-box" id="signupBox">
-      <p>🔥 Want 3 more proven side hustle ideas now? Sign up and we’ll send them to your inbox.</p>
-      <!-- Placeholder for future email service -->
-      <form>
-        <input type="email" placeholder="Enter your email" required />
-        <button class="email-btn" type="submit">Subscribe</button>
-      </form>
-      <p id="success-msg" style="display:none; color:#00ffae; font-weight:bold; margin-top:1rem;">
-        You're in! Welcome to The Rich Click 💸 Check your inbox for exclusive side hustles.
-      </p>
-    </div>
-
-    <div class="blog-promo">
-      <h2>🚀 See Real Hustlers Making Real Money</h2>
-      <p>We break down exactly how creators are making $10k/month with clever side hustles—no fluff, just the facts.</p>
-      <p><a href="/blog/blog.html">🧠 Dive into the Blog</a></p>
-    </div>
-  </div>
-
-  <script>
-    const ideas = [
-      "Couch flipping",
-      "Airbnb arbitrage",
-      "Wholesale real estate",
-      "Print on demand T-shirts",
-      "Sell digital planners on Etsy",
-      "Create faceless YouTube videos",
-      "Self-publish low-content books",
-      "Online tutoring",
-      "Amazon FBA",
-      "Flipping domain names",
-      "Drop servicing",
-      "Offer Notion templates",
-      "Sell Canva templates",
-      "Rent your car on Turo",
-      "Voiceover acting",
-      "Freelance video editing",
-      "Write newsletters with Beehiiv",
-      "Manage social media for businesses",
-      "Remote customer service gigs",
-      "Sell prompts for AI tools",
-      "Run TikTok ads for local businesses",
-      "Instagram growth consulting",
-      "Freelance UGC content creation",
-      "Virtual assistant services",
-      "Create and sell online courses",
-      "Tech support freelancing",
-      "Flipping yard sale items",
-      "License your photography",
-      "Create stock music",
-      "Print on demand journals",
-      "Etsy mystery boxes",
-      "Digital coloring books",
-      "Freelance copywriting",
-      "Subscription box reselling",
-      "Crypto affiliate programs",
-      "Build and flip Shopify stores",
-      "Design logos on Fiverr",
-      "Run a podcast network",
-      "Build SaaS tools with no-code",
-      "Print merch for influencers",
-      "Offer AI automation services",
-      "Website flipping",
-      "Sell PowerPoint templates",
-      "Dropship from local suppliers",
-      "Mobile detailing business",
-      "Offer resume writing",
-      "Event videography",
-      "Offer drone photography",
-      "Design tattoo ideas",
-      "Ghostwrite eBooks",
-      "Curate Amazon storefronts",
-      "Freelance email marketing",
-      "Etsy wall art printables",
-      "Flipping vintage clothes",
-      "Sell MRR products",
-      "Pet sitting services",
-      "Sell car decals",
-      "Create a local newsletter",
-      "Write business plans",
-      "Flip vending machines",
-      "Buy and sell concert tickets",
-      "Niche meme pages",
-      "Offer bookkeeping services",
-      "Teach music lessons online",
-      "Host virtual workshops",
-      "Real estate bird dogging",
-      "LinkedIn profile optimization",
-      "Offer proofreading services",
-      "Build niche websites",
-      "Monetize your email list",
-      "Buy and flip electronics",
-      "Flipping Pokemon cards",
-      "Sell phone wallpapers",
-      "Write scripts for YouTubers",
-      "Niche coaching/consulting",
-      "Sell fonts or typefaces",
-      "Dropshipping with personalization",
-      "Etsy SVG bundles",
-      "Offer online fitness coaching",
-      "Buy liquidation pallets",
-      "Create viral Twitter threads",
-      "Offer Fiverr gigs as bundles",
-      "Run IG pages then sell shoutouts",
-      "Review tech products on YouTube",
-      "Use GPT to write niche guides",
-      "Host Airbnb experiences",
-      "Offer Canva coaching",
-      "Review products on TikTok",
-      "Create AI coloring books",
-      "Become an affiliate for SaaS tools",
-      "Resell online subscriptions",
-      "Run a fantasy sports newsletter",
-      "Sell editable wedding invites",
-      "Create a job board site",
-      "Build PLR product bundles",
-      "Rent out photography gear",
-      "Sell niche eBook guides",
-      "Flip clearance items on eBay",
-      "Write blog posts for others",
-      "License your art to POD platforms"
-    ];
-
-    const maxClicks = 3;
-    const ideaBox = document.getElementById("ideaBox");
-    const limitBox = document.getElementById("limitBox");
-    const signupBox = document.getElementById("signupBox");
-    const countdown = document.getElementById("countdown");
-    const hustleBtn = document.getElementById("hustleBtn");
-
-    // Initialize localStorage if not set
-    const today = new Date().toLocaleDateString();
-    const storedDate = localStorage.getItem("lastClickedDate");
-    let count = parseInt(localStorage.getItem("clickCount")) || 0;
-
-    if (storedDate !== today) {
-      localStorage.setItem("clickCount", "0");
-      localStorage.setItem("lastClickedDate", today);
-      count = 0;
+  function generateIdea() {
+    if (count >= maxClicks) {
+      showLimit();
+      return;
     }
 
-    function updateCountdown() {
-      const now = new Date();
-      const nextMidnight = new Date();
-      nextMidnight.setHours(24, 0, 0, 0);
-      let seconds = Math.floor((nextMidnight - now) / 1000);
+    // Select a random idea that hasn't already been shown
+    let shownIdeas = JSON.parse(localStorage.getItem("shownIdeas") || "[]");
+    let remainingIdeas = ideas.filter(idea => !shownIdeas.includes(idea));
 
-      const interval = setInterval(() => {
-        if (seconds <= 0) {
-          clearInterval(interval);
-          return;
-        }
-        seconds--;
-        const hrs = Math.floor(seconds / 3600);
-        const mins = Math.floor((seconds % 3600) / 60);
-        const secs = seconds % 60;
-        countdown.innerText = `Come back in ${hrs}h ${mins}m ${secs}s for a new hustle!`;
-      }, 1000);
+    if (remainingIdeas.length === 0) {
+      remainingIdeas = ideas; // Reset if somehow all are shown
+      shownIdeas = [];
     }
 
-    hustleBtn.addEventListener("click", () => {
-      if (count >= maxClicks) {
-        limitBox.style.display = "block";
-        signupBox.style.display = "block";
-        updateCountdown();
-        return;
-      }
+    const randomIdea = remainingIdeas[Math.floor(Math.random() * remainingIdeas.length)];
+    ideaBox.innerText = randomIdea;
 
-      const randomIdea = ideas[Math.floor(Math.random() * ideas.length)];
-      ideaBox.innerText = randomIdea;
-      count++;
-      localStorage.setItem("clickCount", count);
+    // Track
+    shownIdeas.push(randomIdea);
+    localStorage.setItem("shownIdeas", JSON.stringify(shownIdeas));
+    count++;
+    localStorage.setItem("clickCount", count);
 
-      if (count >= maxClicks) {
-        limitBox.style.display = "block";
-        signupBox.style.display = "block";
-        updateCountdown();
-      }
-    });
-  </script>
-</body>
-</html>
+    if (count >= maxClicks) {
+      showLimit();
+    }
+  }
+
+  function showLimit() {
+    limitBox.style.display = "block";
+    signupBox.style.display = "block";
+
+    let seconds = 86400 - (Math.floor(Date.now() / 1000) % 86400);
+    const interval = setInterval(() => {
+      seconds--;
+      const hrs = Math.floor(seconds / 3600);
+      const mins = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+      countdown.innerText = `⏳ Come back in ${hrs}h ${mins}m ${secs}s for a new hustle!`;
+      if (seconds <= 0) clearInterval(interval);
+    }, 1000);
+  }
+
+  function handleSuccess() {
+    setTimeout(() => {
+      document.getElementById('success-msg').style.display = 'block';
+    }, 1000);
+  }
+</script>
