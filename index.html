@@ -1,95 +1,181 @@
-<script>
-  const ideas = [
-    "Couch flipping", "Airbnb arbitrage", "Wholesale real estate",
-    "Print on demand T-shirts", "Sell digital planners on Etsy", "Create faceless YouTube videos",
-    "Self-publish low-content books", "Online tutoring", "Amazon FBA",
-    "Flipping domain names", "Drop servicing", "Offer Notion templates",
-    "Sell Canva templates", "Rent your car on Turo", "Voiceover acting",
-    "Freelance video editing", "Write newsletters with Beehiiv", "Manage social media for businesses",
-    "Remote customer service gigs", "Sell prompts for AI tools", "Run TikTok ads for local businesses",
-    "Instagram growth consulting", "Freelance UGC content creation", "Virtual assistant services",
-    "Create and sell online courses", "Tech support freelancing", "Flipping yard sale items",
-    "License your photography", "Create stock music", "Print on demand journals",
-    "Etsy mystery boxes", "Digital coloring books", "Freelance copywriting",
-    "Subscription box reselling", "Crypto affiliate programs", "Build and flip Shopify stores",
-    "Design logos on Fiverr", "Run a podcast network", "Build SaaS tools with no-code",
-    "Print merch for influencers", "Offer AI automation services", "Website flipping",
-    "Sell PowerPoint templates", "Dropship from local suppliers", "Mobile detailing business",
-    "Offer resume writing", "Event videography", "Offer drone photography",
-    "Design tattoo ideas", "Ghostwrite eBooks", "Curate Amazon storefronts",
-    "Freelance email marketing", "Etsy wall art printables", "Flipping vintage clothes",
-    "Sell MRR products", "Pet sitting services", "Sell car decals",
-    "Create a local newsletter", "Write business plans", "Flip vending machines",
-    "Buy and sell concert tickets", "Niche meme pages", "Offer bookkeeping services",
-    "Teach music lessons online", "Host virtual workshops", "Real estate bird dogging",
-    "LinkedIn profile optimization", "Offer proofreading services", "Build niche websites",
-    "Monetize your email list", "Buy and flip electronics", "Flipping Pokemon cards",
-    "Sell phone wallpapers", "Write scripts for YouTubers", "Niche coaching/consulting",
-    "Sell fonts or typefaces", "Dropshipping with personalization", "Etsy SVG bundles",
-    "Offer online fitness coaching", "Buy liquidation pallets", "Create viral Twitter threads",
-    "Offer Fiverr gigs as bundles", "Run IG pages then sell shoutouts", "Review tech products on YouTube",
-    "Use GPT to write niche guides", "Host Airbnb experiences", "Offer Canva coaching",
-    "Review products on TikTok", "Create AI coloring books", "Become an affiliate for SaaS tools",
-    "Resell online subscriptions", "Run a fantasy sports newsletter", "Sell editable wedding invites",
-    "Create a job board site", "Build PLR product bundles", "Rent out photography gear",
-    "Sell niche eBook guides", "Flip clearance items on eBay", "Write blog posts for others",
-    "License your art to POD platforms"
-  ];
-
-  let count = parseInt(localStorage.getItem("clickCount")) || 0;
-  const maxClicks = 3;
-  const ideaBox = document.getElementById("ideaBox");
-  const limitBox = document.getElementById("limitBox");
-  const signupBox = document.getElementById("signupBox");
-  const countdown = document.getElementById("countdown");
-
-  function generateIdea() {
-    if (count >= maxClicks) {
-      showLimit();
-      return;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Rich Click</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      text-align: center;
+      padding: 40px 20px;
     }
 
-    // Select a random idea that hasn't already been shown
-    let shownIdeas = JSON.parse(localStorage.getItem("shownIdeas") || "[]");
-    let remainingIdeas = ideas.filter(idea => !shownIdeas.includes(idea));
-
-    if (remainingIdeas.length === 0) {
-      remainingIdeas = ideas; // Reset if somehow all are shown
-      shownIdeas = [];
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
     }
 
-    const randomIdea = remainingIdeas[Math.floor(Math.random() * remainingIdeas.length)];
-    ideaBox.innerText = randomIdea;
-
-    // Track
-    shownIdeas.push(randomIdea);
-    localStorage.setItem("shownIdeas", JSON.stringify(shownIdeas));
-    count++;
-    localStorage.setItem("clickCount", count);
-
-    if (count >= maxClicks) {
-      showLimit();
+    p {
+      font-size: 1.2em;
+      color: #555;
     }
-  }
 
-  function showLimit() {
-    limitBox.style.display = "block";
-    signupBox.style.display = "block";
+    #ideaButton {
+      background-color: #ffd700;
+      color: #000;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-top: 20px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
 
-    let seconds = 86400 - (Math.floor(Date.now() / 1000) % 86400);
-    const interval = setInterval(() => {
-      seconds--;
-      const hrs = Math.floor(seconds / 3600);
-      const mins = Math.floor((seconds % 3600) / 60);
-      const secs = seconds % 60;
-      countdown.innerText = `⏳ Come back in ${hrs}h ${mins}m ${secs}s for a new hustle!`;
-      if (seconds <= 0) clearInterval(interval);
-    }, 1000);
-  }
+    #ideaButton:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
 
-  function handleSuccess() {
-    setTimeout(() => {
-      document.getElementById('success-msg').style.display = 'block';
-    }, 1000);
-  }
-</script>
+    #ideaDisplay {
+      margin-top: 30px;
+      font-size: 1.5em;
+      color: #222;
+    }
+
+    form {
+      margin-top: 50px;
+    }
+
+    input[type="email"] {
+      padding: 10px;
+      width: 250px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      margin-left: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #222;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>The Rich Click</h1>
+  <p>Click the button for a money-making idea. Come back daily for more!</p>
+  <button id="ideaButton">Get Idea</button>
+  <div id="ideaDisplay"></div>
+
+  <form>
+    <h3>Subscribe for more free hustle ideas</h3>
+    <input type="email" placeholder="Enter your email" />
+    <input type="submit" value="Subscribe" />
+  </form>
+
+  <script>
+    const ideas = [
+      "Couch flipping", "Airbnb arbitrage", "Wholesale real estate", "Print on demand T-shirts",
+      "Sell digital planners on Etsy", "Create faceless YouTube videos", "Self-publish low-content books",
+      "Online tutoring", "Amazon FBA", "Flipping domain names", "Drop servicing", "Offer Notion templates",
+      "Sell Canva templates", "Rent your car on Turo", "Voiceover acting", "Freelance video editing",
+      "Write newsletters with Beehiiv", "Manage social media for businesses", "Remote customer service gigs",
+      "Sell prompts for AI tools", "Run TikTok ads for local businesses", "Instagram growth consulting",
+      "Freelance UGC content creation", "Virtual assistant services", "Create and sell online courses",
+      "Tech support freelancing", "Flipping yard sale items", "License your photography", "Create stock music",
+      "Print on demand journals", "Etsy mystery boxes", "Digital coloring books", "Freelance copywriting",
+      "Subscription box reselling", "Crypto affiliate programs", "Build and flip Shopify stores",
+      "Design logos on Fiverr", "Run a podcast network", "Build SaaS tools with no-code",
+      "Print merch for influencers", "Offer AI automation services", "Website flipping", "Sell PowerPoint templates",
+      "Dropship from local suppliers", "Mobile detailing business", "Offer resume writing", "Event videography",
+      "Offer drone photography", "Design tattoo ideas", "Ghostwrite eBooks", "Curate Amazon storefronts",
+      "Freelance email marketing", "Etsy wall art printables", "Flipping vintage clothes", "Sell MRR products",
+      "Pet sitting services", "Sell car decals", "Create a local newsletter", "Write business plans",
+      "Flip vending machines", "Buy and sell concert tickets", "Niche meme pages", "Offer bookkeeping services",
+      "Teach music lessons online", "Host virtual workshops", "Real estate bird dogging",
+      "LinkedIn profile optimization", "Offer proofreading services", "Build niche websites",
+      "Monetize your email list", "Buy and flip electronics", "Flipping Pokemon cards", "Sell phone wallpapers",
+      "Write scripts for YouTubers", "Niche coaching/consulting", "Sell fonts or typefaces",
+      "Dropshipping with personalization", "Etsy SVG bundles", "Offer online fitness coaching",
+      "Buy liquidation pallets", "Create viral Twitter threads", "Offer Fiverr gigs as bundles",
+      "Run IG pages then sell shoutouts", "Review tech products on YouTube", "Use GPT to write niche guides",
+      "Host Airbnb experiences", "Offer Canva coaching", "Review products on TikTok", "Create AI coloring books",
+      "Become an affiliate for SaaS tools", "Resell online subscriptions", "Run a fantasy sports newsletter",
+      "Sell editable wedding invites", "Create a job board site", "Build PLR product bundles",
+      "Rent out photography gear", "Sell niche eBook guides", "Flip clearance items on eBay",
+      "Write blog posts for others", "License your art to POD platforms", "Sell budgeting templates",
+      "Start a niche Facebook group", "Lead gen for local services", "Sell digital stickers on Etsy",
+      "Build GPT-powered chatbots", "Start a cleaning service", "Teach a skill on Zoom",
+      "Sell AI-generated art", "Offer SEO audits", "Rent a room on Airbnb", "Freelance transcribing",
+      "Sell Excel templates", "Offer marketing strategy sessions", "Coach first-time freelancers",
+      "Make niche parody accounts", "Flip refurbished tech", "Test websites for money", "Be a TaskRabbit runner",
+      "Sell voice packs", "Be a wedding DJ", "Flip watches", "Manage OnlyFans accounts", "Create printable worksheets",
+      "Package and sell Notion dashboards", "Run print ads for offline businesses", "Sell stock video footage",
+      "Publish paid newsletters", "Sell banner ad space on niche sites", "Offer weekly niche industry recaps",
+      "Edit wedding footage", "Write landing page copy", "Create quizzes for lead gen", "Offer retainer packages for VAs",
+      "Coach people on writing resumes", "Sell career guides for niche jobs", "Automate tasks with Zapier",
+      "Be a Discord community manager", "Manage Shopify store operations", "Design UI mockups for apps",
+      "Sell Instagram carousel templates", "Build backlink packages", "Offer chat support services",
+      "Create niche GIFs for Giphy", "Make and sell travel itineraries", "Create influencer media kits",
+      "Build swipe file libraries", "Curate themed Etsy shops", "Sell idea packs for creators",
+      "Design merch for podcasts", "Sell prebuilt funnel templates", "Host a paid Slack mastermind",
+      "Freelance for local newspapers", "Write eulogy or speech templates", "Create celebration flyers",
+      "Make reels for small businesses", "Offer B2B lead scraping", "Sell template websites on Gumroad",
+      "Design banners for live streamers", "Write whitepapers", "Create tutorial YouTube channels",
+      "Sell niche resume templates", "Design onboarding kits", "Create downloadable planners",
+      "Create Google Sheets tools", "Make business card templates", "Sell editable menus for restaurants",
+      "Host a paid accountability group", "Design infographics", "Curate Spotify playlists for brands",
+      "Sell Kindle short reads", "Do local restaurant reviews on TikTok", "Build e-commerce brand starter packs",
+      "Design email newsletter layouts", "Run local promo campaigns", "Flip branded merchandise",
+      "Create niche meme NFTs", "Offer corporate gifting packages", "Flip rare sneakers",
+      "Write email sequences for launches", "Sell editable Instagram bios", "Create countdown timers for websites",
+      "Sell packaging mockups", "Design slide decks", "Build directory websites", "Create niche Pinterest boards",
+      "Offer photo editing for real estate agents", "Create baby milestone templates", "Make money challenge journals",
+      "Write comparison posts for affiliates", "Create vertical video templates", "Sell stock music loops",
+      "Write Reddit-style money-saving guides", "Create AI-generated children’s stories", "Offer Shopify theme customizations",
+      "Sell AI avatars or headshots", "Create before/after photo reels for weight loss brands", "Write ghostwritten Medium articles",
+      "Flip custom-painted sneakers", "Offer website speed optimization", "Curate affiliate product lists"
+    ];
+
+    function getClicksToday() {
+      const stored = localStorage.getItem("clicks");
+      const reset = localStorage.getItem("resetTime");
+      const now = Date.now();
+
+      if (!reset || now > parseInt(reset)) {
+        localStorage.setItem("clicks", "0");
+        localStorage.setItem("resetTime", now + 24 * 60 * 60 * 1000);
+        return 0;
+      }
+      return parseInt(stored || "0");
+    }
+
+    let clicks = getClicksToday();
+
+    document.getElementById("ideaButton").addEventListener("click", function () {
+      if (clicks >= 3) {
+        document.getElementById("ideaDisplay").innerText = "You've reached your daily limit. Come back tomorrow!";
+        this.disabled = true;
+        return;
+      }
+
+      const idea = ideas[Math.floor(Math.random() * ideas.length)];
+      document.getElementById("ideaDisplay").innerText = idea;
+      clicks++;
+      localStorage.setItem("clicks", clicks);
+    });
+  </script>
+</body>
+</html>
