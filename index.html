@@ -160,24 +160,33 @@
       <div class="countdown" id="countdown"></div>
     </div>
 
-    <div class="signup-box" id="signupBox">
-      <p>🔥 Want 3 more proven side hustle ideas now? Sign up and we’ll send them to your inbox.</p>
-      <form 
-        action="https://assets.mailerlite.com/jsonp/1530353/forms/154795251155862876/subscribe" 
-        method="post" 
-        target="ml-submission-frame"
-        onsubmit="handleSuccess()"
-      >
-        <input type="email" name="fields[email]" placeholder="Enter your email" required />
-        <input type="hidden" name="ml-submit" value="1" />
-        <input type="hidden" name="anticsrf" value="true" />
-        <button class="email-btn" type="submit">Subscribe</button>
-      </form>
-      <iframe name="ml-submission-frame" style="display:none;"></iframe>
-      <p id="success-msg" style="display:none; color:#00ffae; font-weight:bold; margin-top:1rem;">
-        You're in! Welcome to The Rich Click 💸 Check your inbox for Exclusive Side hustles.
-      </p>
-    </div>
+   <div class="signup-box" id="signupBox">
+  <p>🔥 Want 3 more proven side hustle ideas now? Sign up and we’ll send them to your inbox.</p>
+  <form id="emailForm">
+    <input type="email" name="email" id="emailInput" placeholder="Enter your email" required />
+    <button class="email-btn" type="submit">Subscribe</button>
+  </form>
+  <p id="success-msg" style="display:none; color:#00ffae; font-weight:bold; margin-top:1rem;">
+    You're in! Welcome to The Rich Click 💸 Check your inbox for Exclusive Side hustles.
+  </p>
+</div>
+
+<script>
+  document.getElementById("emailForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const email = document.getElementById("emailInput").value;
+
+    fetch("https://script.google.com/macros/s/AKfycbxgaBsw2hi8MkCHyIHWVjydiGLStk9hjMDwGp5bYOJQ1zAhRKwsNLdySh6wAX5hjK_8/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `email=${encodeURIComponent(email)}`
+    }).then(() => {
+      document.getElementById("success-msg").style.display = "block";
+      document.getElementById("emailInput").value = "";
+    });
+  });
+</script>
 
     <div class="blog-promo">
       <h2>🚀 See Real Hustlers Making Real Money</h2>
